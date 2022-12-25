@@ -13,8 +13,8 @@ namespace Pramod.GuestTracker.Web.ViewModels
         public string GuestName { get; set; }
         public DateTime ArrivalTime { get; set; }
         [Required]
-        [Display(Name ="Number of People")]
-        public int NumberOfPeople { get; set; }
+        [Display(Name = "Number of People")]
+        public int NumberOfPeople { get; set; } = 1;
         public bool IsVip { get; set; }
 
 
