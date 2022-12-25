@@ -18,6 +18,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vintasoft.Barcode;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Parsing;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf.Interactive;
 
 namespace Pramod.GuestTracker.QR
 {
@@ -69,13 +73,81 @@ namespace Pramod.GuestTracker.QR
 
         private void btnGenerteQR_Click(object sender, EventArgs e)
         {
-            foreach (var record in grdGuestList.View.Records)
-            {
-                var guest = (Guest)record.Data;
-                var code = guest.Code;
-                var qr= CreateQRCode($"http://gt.wowqr.in?id={code}");
-                DrawGuestInfo(guest,   qr);
+            PdfTemplate templatePage1 = null;
+            PdfTemplate templatePage2 = null;
 
+            using (var templateCard = new PdfLoadedDocument("Reception_Map-02.pdf"))
+            {
+                var loadedPage2 = templateCard.Pages[1] as PdfLoadedPage;
+                var pgraphics = loadedPage2.Graphics;
+                var dirImage = new PdfBitmap("directions.png");
+                var w = dirImage.Width * 1.5f;
+                var h = dirImage.Height * 1.5f;
+                pgraphics.DrawImage(dirImage, 180f, 1100f, w, h);
+                pgraphics.Flush();
+
+                //Create url annotation
+                PdfUriAnnotation directionsLink = new PdfUriAnnotation(new RectangleF(180f, 1100f, w, h));
+                //Add the link
+                directionsLink.Uri = "https://maps.app.goo.gl/finDQUhB9Q9CXh7QA";
+                //Border
+                directionsLink.Border = new PdfAnnotationBorder(0, 0, 0);
+                //Add the color
+                directionsLink.Color = new PdfColor(Color.White);
+                //Add the annotation
+                loadedPage2.Annotations.Add(directionsLink);
+                templatePage2 = loadedPage2.CreateTemplate();
+
+
+
+                foreach (var record in grdGuestList.View.Records)
+                {
+                    var guest = (Guest)record.Data;
+                    var code = guest.Code;
+                    var qr = CreateQRCode($"http://gt.wowqr.in?id={code}");
+                    DrawGuestInfoPDF(guest, qr, templateCard);
+                    templateCard.Pages[1].Graphics.DrawPdfTemplate(templatePage2, PointF.Empty);
+
+                }
+                templateCard.Close();
+            }
+
+        }
+
+        private void DrawGuestInfoPDF(Guest guest, Bitmap qr, PdfLoadedDocument templateDoc)
+        {
+
+            var cgraphics = templateDoc.Pages[1].Graphics;
+            using (var label = new Bitmap(800, 400))
+            using (var lgraphics = Graphics.FromImage(label))
+            {
+                FillRoundedRectangle(lgraphics, new SolidBrush(Color.White), new Rectangle(0, 110, 210, 210), 20);
+                //DrawRoundedRectangle(lgraphics, new Pen(Color.FromArgb(255, 1, 32, 17),2f), new Rectangle(10,10,400,300), 20);
+                var brushColor = Color.FromArgb(255, 1, 32, 17);
+                lgraphics.DrawString(guest.Name, new Font("Verdana", 30f, FontStyle.Bold),
+                   new SolidBrush(brushColor), 250, 120);
+
+
+                lgraphics.DrawImage(qr, 10, 120);
+
+                if (guest.IsVip)
+                    brushColor = Color.DarkGoldenrod;
+                lgraphics.DrawString(guest.Code.PadLeft(3, '0'), new Font("Verdana", 110f, FontStyle.Regular),
+                    new SolidBrush(brushColor), 240, 150);
+
+                //label.Save("label.png", ImageFormat.Png);
+
+                cgraphics.DrawImage(PdfImage.FromImage(label), new Point(300, 1250));
+
+                string dirName = "cards";
+                if (!Directory.Exists(dirName))
+                {
+                    Directory.CreateDirectory(dirName);
+                }
+
+                var guestName = guest.Name.ToLower().Replace(' ', '-');
+                var filePath = Path.Combine(dirName, $"{guest.Code}-{guestName}.pdf");
+                templateDoc.Save(filePath );
             }
 
         }
