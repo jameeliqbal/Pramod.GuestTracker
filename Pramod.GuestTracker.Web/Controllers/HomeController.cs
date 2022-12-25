@@ -15,7 +15,8 @@ namespace Pramod.GuestTracker.Web.Controllers
         public ActionResult Index(int? id)
         {
             RegisterAttendanceViewModel registerGuest = new RegisterAttendanceViewModel();
-            var guest = db.Guests.Find(id);
+            //var guest = db.Guests.Find(id);
+            var guest = db.Guests.SingleOrDefault(g=>g.Code==id.ToString());
             if (guest != null)
             {
                 registerGuest.GuestId = guest.Id;
