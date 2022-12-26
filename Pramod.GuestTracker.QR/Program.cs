@@ -14,7 +14,7 @@ namespace Pramod.GuestTracker.QR
         [STAThread]
         static void Main()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Njg4ODdAMzEzNjJlMzQyZTMwSDVkaEpYS3ZETWlXUkVMMGZ3TzBOL295WUpHSnJuNWcwZWlleWN1dnhXYz0=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("ODE3NTQzQDMyMzAyZTM0MmUzMFA4TVN1THBCSmdoNEF3WHh3MXAxMjZsODdsTHY1SW0xd2tZR3J4VFJEVmM9");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
