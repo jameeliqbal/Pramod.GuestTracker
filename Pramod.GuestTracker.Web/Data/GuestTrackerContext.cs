@@ -19,8 +19,9 @@ namespace Pramod.GuestTracker.Web.Data
         {
         }
 
-        public System.Data.Entity.DbSet<Pramod.GuestTracker.Web.Models.Guest> Guests { get; set; }
+        public DbSet<Models.Guest> Guests { get; set; }
+        public DbSet<Models.Attendence> Attendences { get; set; }
+        public DbSet<Models.WAMessageStatus> WhatsappMessageStatus { get; set; }
 
-        public System.Data.Entity.DbSet<Pramod.GuestTracker.Web.Models.Attendence> Attendences { get; set; }
     }
 }

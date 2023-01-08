@@ -145,6 +145,7 @@
     <Compile Include="Controllers\AttendencesController.cs" />
     <Compile Include="Controllers\GuestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Data\GuestTrackerContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -165,9 +166,19 @@
     <Compile Include="Migrations\202212200917452_AddedGuestIdFieldInAttendanceEntity.Designer.cs">
       <DependentUpon>202212200917452_AddedGuestIdFieldInAttendanceEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202301010940476_AddedWAMessageStatusEntity.cs" />
+    <Compile Include="Migrations\202301010940476_AddedWAMessageStatusEntity.Designer.cs">
+      <DependentUpon>202301010940476_AddedWAMessageStatusEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202301011029044_AddedRemarksPropertyToWAMessageStatusEntity.cs" />
+    <Compile Include="Migrations\202301011029044_AddedRemarksPropertyToWAMessageStatusEntity.Designer.cs">
+      <DependentUpon>202301011029044_AddedRemarksPropertyToWAMessageStatusEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Attendence.cs" />
     <Compile Include="Models\Guest.cs" />
+    <Compile Include="Models\WAMessageStatus.cs" />
+    <Compile Include="Models\WhatsAppWebhookModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\RegisterAttendanceViewModel.cs" />
   </ItemGroup>
@@ -252,6 +263,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212200917452_AddedGuestIdFieldInAttendanceEntity.resx">
       <DependentUpon>202212200917452_AddedGuestIdFieldInAttendanceEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301010940476_AddedWAMessageStatusEntity.resx">
+      <DependentUpon>202301010940476_AddedWAMessageStatusEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301011029044_AddedRemarksPropertyToWAMessageStatusEntity.resx">
+      <DependentUpon>202301011029044_AddedRemarksPropertyToWAMessageStatusEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
