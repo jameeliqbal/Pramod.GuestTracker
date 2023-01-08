@@ -31,8 +31,9 @@ namespace Pramod.GuestTracker.QR
         {
             this.btnGetGuestList = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.grdGuestList = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            this.btnGenerateHubVerifyToken = new System.Windows.Forms.Button();
             this.btnGenerteQR = new System.Windows.Forms.Button();
+            this.grdGuestList = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,6 +60,7 @@ namespace Pramod.GuestTracker.QR
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnGenerateHubVerifyToken);
             this.splitContainer1.Panel1.Controls.Add(this.btnGenerteQR);
             this.splitContainer1.Panel1.Controls.Add(this.btnGetGuestList);
             // 
@@ -69,15 +71,15 @@ namespace Pramod.GuestTracker.QR
             this.splitContainer1.SplitterDistance = 59;
             this.splitContainer1.TabIndex = 1;
             // 
-            // grdGuestList
+            // btnGenerateHubVerifyToken
             // 
-            this.grdGuestList.AccessibleName = "Table";
-            this.grdGuestList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdGuestList.Location = new System.Drawing.Point(0, 0);
-            this.grdGuestList.Name = "grdGuestList";
-            this.grdGuestList.Size = new System.Drawing.Size(800, 387);
-            this.grdGuestList.TabIndex = 0;
-            this.grdGuestList.Text = "sfDataGrid1";
+            this.btnGenerateHubVerifyToken.Location = new System.Drawing.Point(597, 14);
+            this.btnGenerateHubVerifyToken.Name = "btnGenerateHubVerifyToken";
+            this.btnGenerateHubVerifyToken.Size = new System.Drawing.Size(191, 23);
+            this.btnGenerateHubVerifyToken.TabIndex = 3;
+            this.btnGenerateHubVerifyToken.Text = "Generate hub.verify_token";
+            this.btnGenerateHubVerifyToken.UseVisualStyleBackColor = true;
+            this.btnGenerateHubVerifyToken.Click += new System.EventHandler(this.btnGenerateHubVerifyToken_Click);
             // 
             // btnGenerteQR
             // 
@@ -89,6 +91,16 @@ namespace Pramod.GuestTracker.QR
             this.btnGenerteQR.UseVisualStyleBackColor = true;
             this.btnGenerteQR.Click += new System.EventHandler(this.btnGenerteQR_Click);
             // 
+            // grdGuestList
+            // 
+            this.grdGuestList.AccessibleName = "Table";
+            this.grdGuestList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdGuestList.Location = new System.Drawing.Point(0, 0);
+            this.grdGuestList.Name = "grdGuestList";
+            this.grdGuestList.Size = new System.Drawing.Size(800, 387);
+            this.grdGuestList.TabIndex = 0;
+            this.grdGuestList.Text = "sfDataGrid1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -96,7 +108,7 @@ namespace Pramod.GuestTracker.QR
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "QR Code Generator";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -113,6 +125,7 @@ namespace Pramod.GuestTracker.QR
         private System.Windows.Forms.SplitContainer splitContainer1;
         private Syncfusion.WinForms.DataGrid.SfDataGrid grdGuestList;
         private System.Windows.Forms.Button btnGenerteQR;
+        private System.Windows.Forms.Button btnGenerateHubVerifyToken;
     }
 }
 

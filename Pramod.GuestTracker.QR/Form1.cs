@@ -72,25 +72,28 @@ namespace Pramod.GuestTracker.QR
             grdGuestList.TableSummaryRows.Add(tableSummaryRow1);
         }
 
-        private void btnGenerteQR_Click(object sender, EventArgs e)
+        private void btnGenerteQR_Click_PDF(object sender, EventArgs e)
         {
             PdfTemplate templatePage1 = null;
             PdfTemplate templatePage2 = null;
 
-            using (var templateCard = new PdfLoadedDocument("Reception_Map-02.pdf"))
-            {
+            //using (var templateCard = new PdfLoadedDocument("Reception_Map-02.pdf"))
+            using (var templateCard = new PdfLoadedDocument("Reception-compressed.pdf"))
+           {
                 var loadedPage1 = templateCard.Pages[0] as PdfLoadedPage;
                 var loadedPage2 = templateCard.Pages[1] as PdfLoadedPage;
                 var pgraphics = loadedPage2.Graphics;
                 var dirImage = new PdfBitmap("directions.png");
-                var directionsWidth = dirImage.Width * 1.5f;
+                var directionsWidth = dirImage.Width * 1.81f;
                 var directionsHeight = dirImage.Height * 1.5f;
-                pgraphics.DrawImage(dirImage, 180f, 1100f, directionsWidth, directionsHeight);
+                //pgraphics.DrawImage(dirImage, 180f, 1100f, directionsWidth, directionsHeight);
+                pgraphics.DrawImage(dirImage, 300f, 970f, directionsWidth, directionsHeight);
                 pgraphics.Flush();
 
                 //Create url annotation
-                PdfUriAnnotation directionsLink = new PdfUriAnnotation(new RectangleF(180f, 1100f, directionsWidth, directionsHeight));
-                //Add the link
+                //PdfUriAnnotation directionsLink = new PdfUriAnnotation(new RectangleF(300f, 1000f, 490f, 50f));
+                PdfUriAnnotation directionsLink = new PdfUriAnnotation(new RectangleF(300f, 1000f, directionsWidth, directionsHeight));
+                //Add the link 
                 directionsLink.Uri = "https://maps.app.goo.gl/finDQUhB9Q9CXh7QA";
                 //Border
                 var border= new PdfAnnotationBorder();
@@ -106,7 +109,54 @@ namespace Pramod.GuestTracker.QR
 
 
 
-                foreach (var record in grdGuestList.View.Records)
+                //foreach (var record in grdGuestList.View.Records)
+                //{
+                //    using (var newDoc = new PdfDocument())
+                //    {
+                //        newDoc.PageSettings.Margins = new PdfMargins { All = 0 };
+                //        newDoc.PageSettings.Size = loadedPage2.Size;
+
+                //        var p1 = newDoc.Pages.Add();
+                //        var p1Graphics = p1.Graphics;
+
+                //        p1Graphics.DrawPdfTemplate(templatePage1, PointF.Empty);
+                //        p1Graphics.Flush();
+
+                //        var p2 = newDoc.Pages.Add();
+                //        var p2Graphics = p2.Graphics;
+
+                //        p2Graphics.DrawPdfTemplate(templatePage2, PointF.Empty);
+                //        p2Graphics.Flush();
+
+                //        //Add the annotation
+                //        p2.Annotations.Add(directionsLink);
+
+                //        var guest = (Guest)record.Data;
+                //        var code = guest.Code;
+                //        var qr = CreateQRCode($"http://gt.wowqr.in?id={code}");
+
+                //        DrawGuestInfoPDF(guest, qr, newDoc);
+                //        newDoc.Close();
+                //    }
+                //}
+
+                var guest1 = new Guest
+                {
+                    Code = "1",
+                    Name = "Pramod Gokhale",
+                    Phone = "919422080811"
+                };
+
+                var guest2= new Guest
+                {
+                    Code = "2",
+                    Name = "Ashutosh Soman",
+                    Phone = "918668987244"
+                };
+
+                var list = new List<Guest> { guest1, guest2 };
+
+                foreach (var guest in list)
                 {
                     using (var newDoc = new PdfDocument())
                     {
@@ -128,7 +178,7 @@ namespace Pramod.GuestTracker.QR
                         //Add the annotation
                         p2.Annotations.Add(directionsLink);
 
-                        var guest = (Guest)record.Data;
+                       
                         var code = guest.Code;
                         var qr = CreateQRCode($"http://gt.wowqr.in?id={code}");
 
@@ -136,10 +186,115 @@ namespace Pramod.GuestTracker.QR
                         newDoc.Close();
                     }
                 }
+
                 templateCard.Close();
             }
 
         }
+
+        private void btnGenerteQR_Click(object sender, EventArgs e)
+        {
+            
+
+            using (var templateCard = Image.FromFile("ReceptionCard.jpg"))
+            {
+                
+
+
+
+                //foreach (var record in grdGuestList.View.Records)
+                //{
+                //    using (var newDoc = new PdfDocument())
+                //    {
+                //        newDoc.PageSettings.Margins = new PdfMargins { All = 0 };
+                //        newDoc.PageSettings.Size = loadedPage2.Size;
+
+                //        var p1 = newDoc.Pages.Add();
+                //        var p1Graphics = p1.Graphics;
+
+                //        p1Graphics.DrawPdfTemplate(templatePage1, PointF.Empty);
+                //        p1Graphics.Flush();
+
+                //        var p2 = newDoc.Pages.Add();
+                //        var p2Graphics = p2.Graphics;
+
+                //        p2Graphics.DrawPdfTemplate(templatePage2, PointF.Empty);
+                //        p2Graphics.Flush();
+
+                //        //Add the annotation
+                //        p2.Annotations.Add(directionsLink);
+
+                //        var guest = (Guest)record.Data;
+                //        var code = guest.Code;
+                //        var qr = CreateQRCode($"http://gt.wowqr.in?id={code}");
+
+                //        DrawGuestInfoPDF(guest, qr, newDoc);
+                //        newDoc.Close();
+                //    }
+                //}
+
+                var guest1 = new Guest
+                {
+                    Code = "1",
+                    Name = "Pramod Gokhale",
+                    Phone = "919422080811"
+                };
+
+                var guest2 = new Guest
+                {
+                    Code = "2",
+                    Name = "Ashutosh Soman",
+                    Phone = "918668987244"
+                };
+
+                var guest3 = new Guest
+                {
+                    Code = "3",
+                    Name = "Jameel Saroash Iqbal",
+                    Phone = "919611133571"
+                };
+
+                var guest4 = new Guest
+                {
+                    Code = "4",
+                    Name = "Mohana Basaran",
+                    Phone = "91987654321"
+                };
+
+
+                var list = new List<Guest> { guest1, guest2,guest3, guest4 };
+                string dirName = "cards";
+                if (!Directory.Exists(dirName))
+                {
+                    Directory.CreateDirectory(dirName);
+                }
+
+                foreach (var guest in list)
+                {
+                        var code = guest.Code;
+                        var qr = CreateQRCode($"http://gt.wowqr.in?id={code}");
+
+                    using (var newImage = new Bitmap(templateCard))
+                    {
+                        newImage.SetResolution(182.0f, 182.0f);
+                        using (var niGraphics = Graphics.FromImage(newImage))
+                        {
+                            niGraphics.SmoothingMode = SmoothingMode.AntiAlias;
+                            DrawGuestInfoJPEG(guest, qr, newImage);
+                        }
+
+
+                        var guestName = guest.Name.ToLower().Trim().Replace(' ', '-');
+                        var filePath = Path.Combine(dirName, $"{guest.Code}-{guestName}.jpg");
+                        newImage.Save(filePath, ImageFormat.Jpeg);
+                    }
+                }
+
+                 
+            }
+
+        }
+
 
         private void DrawGuestInfoPDF(Guest guest, Bitmap qr, PdfDocument newDoc)
         {
@@ -174,9 +329,43 @@ namespace Pramod.GuestTracker.QR
 
                 var guestName = guest.Name.ToLower().Replace(' ', '-');
                 var filePath = Path.Combine(dirName, $"{guest.Code}-{guestName}.pdf");
-                newDoc.Save(filePath );
+                newDoc.Save(filePath);
             }
 
+        }
+
+        private void DrawGuestInfoJPEG(Guest guest, Bitmap qr, Bitmap card)
+        {
+            using (var cgraphics = Graphics.FromImage(card))
+            //using (var label = new Bitmap(400, 300))
+            {
+                //label.SetResolution(300.0f, 300.0f);
+                //using (var lgraphics = Graphics.FromImage(label))
+                {
+                    //lgraphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+                    FillRoundedRectangle(cgraphics, new SolidBrush(Color.White), new Rectangle(2900, 2750, 320, 320), 20);
+                    //DrawRoundedRectangle(lgraphics, new Pen(Color.FromArgb(255, 1, 32, 17),2f), new Rectangle(10,10,400,300), 20);
+                    var brushColor = Color.FromArgb(255, 1, 32, 17);
+                    cgraphics.DrawString(guest.Name, new Font("Verdana", 20f, FontStyle.Bold),
+                       new SolidBrush(brushColor), 3250, 2760);
+
+
+                    cgraphics.DrawImage(qr, 2910, 2760, 300,300);
+
+                    if (guest.IsVip)
+                        brushColor = Color.DarkGoldenrod;
+                   cgraphics.DrawString(guest.Code.PadLeft(3, '0'), new Font("Verdana", 110f, FontStyle.Regular),
+                        new SolidBrush(brushColor), 3200, 2760);
+
+                    //label.Save("label.png", ImageFormat.Png);
+
+                    //cgraphics.DrawImage(label, new Point(1120, 1050));
+
+
+
+                }
+            }
         }
 
         private void DrawGuestInfo(Guest guest, Bitmap qr)
@@ -313,11 +502,15 @@ namespace Pramod.GuestTracker.QR
         }
 
 
+   
+
+
         private Bitmap CreateQRCode(string data)
         {
-           return GenerateColorQRCodeFromText("", data, 2, 2, "", 0);
+            return GenerateColorQRCodeFromText("", data, 2, 2, "", 0);
         }
 
+        
         private Bitmap GenerateColorQRCodeFromText(string QRPDFFilename, string QRData, double widthInch, double heightInch, string QRFileType, double logoSizePercentage)
         {
             try
@@ -326,7 +519,7 @@ namespace Pramod.GuestTracker.QR
                 //https://www.vintasoft.com/docs/vsbarcode-dotnet/Vintasoft.Barcode/Vintasoft.Barcode.BarcodeGraphicsRenderer.html
 
 
-                float rez = 300f;
+                float rez = 300.0f;
                 //int width =  600, height = 600;
                 //formula for inch to pixel = inch x resolution; 1inch = 96pixels https://www.pixelto.net/inches-to-px-converter
                 double width = (double)(rez * widthInch), height = (double)(rez * heightInch);
@@ -398,6 +591,11 @@ namespace Pramod.GuestTracker.QR
             }
         }
 
+        private void btnGenerateHubVerifyToken_Click(object sender, EventArgs e)
+        {
+           var hubVerifyToken= Guid.NewGuid();
+            System.Diagnostics.Debug.WriteLine(hubVerifyToken);
+        }
     }
 
     public class Guest
