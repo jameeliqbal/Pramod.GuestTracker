@@ -18,7 +18,7 @@ namespace Pramod.GuestTracker.WhatsAppMessenger
 {
     public partial class WAMessageForm : Form
     {
-        private const string token = "EAASnJ6aG7ZB4BADCYHILVZAFUoI4LZAR2aomAd8FZC6zzUHLmTiDHBeav4V9peKZC7kFJkhNe36zaDRHq8kJj0cBxu4ACNgfesfvw3LZAbSKsrcwQ6ZA0YXZCHVIKzRZCoZBFjLXgSiZA3q6GgO1cnOe9LHY13LjAjVGxOmA7NL2RKyNrKeSPn30UwH"; //GTWAMessenger
+        private const string token = ""; //GTWAMessenger
 
         public WAMessageForm()
         {
